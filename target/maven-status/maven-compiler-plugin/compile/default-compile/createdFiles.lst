@@ -1,8 +1,11 @@
+com/example/product/config/MailConfig.class
+com/example/product/dto/SecurityResponse.class
 com/example/product/repository/ProductRepository.class
 com/example/product/dto/ResponseTasa.class
 com/example/product/controller/CambioController.class
 com/example/product/service/ProductServ.class
 com/example/product/controller/ProductoController.class
+com/example/product/controller/WebClientConfig.class
 com/example/product/service/ProducServImpl.class
 com/example/product/dto/ResponseProduct.class
 com/example/product/dto/Message.class
@@ -10,7 +13,10 @@ com/example/product/ProductApplication.class
 com/example/product/dto/ResponseTasa$ResponseTasaBuilder.class
 com/example/product/product/Product.class
 com/example/product/service/CambioServImpl.class
+com/example/product/service/EmailService.class
 com/example/product/repository/RepositoryCambio.class
 com/example/product/dto/RequestProduct.class
+com/example/product/dto/EmailRequest.class
 com/example/product/product/Cambio.class
+com/example/product/controller/EmailController.class
 com/example/product/service/CambioService.class

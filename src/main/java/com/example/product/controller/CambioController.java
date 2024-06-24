@@ -19,7 +19,7 @@ public class CambioController {
     private  final CambioService service;
 
     @GetMapping("/lista")
-    public ResponseEntity<List<ResponseTasa>> list(){
+    public ResponseEntity<List<ResponseTasa>> list() {
         List<ResponseTasa> list = service.findAll();
         return new ResponseEntity(list, HttpStatus.OK);
     }
@@ -31,20 +31,20 @@ public class CambioController {
         return new ResponseEntity(product, HttpStatus.OK);
     }
     @PutMapping("/update/{request}")
-    public  ResponseEntity<ResponseTasa> update(@RequestBody ResponseTasa request) {
-        ResponseTasa product = service.updateCambio(request);
+    public  ResponseEntity<ResponseTasa> update(@RequestBody ResponseTasa request,@RequestHeader( value ="Authorization") String token) {
+        ResponseTasa product = service.updateCambio(request,token);
         return new ResponseEntity(product, HttpStatus.OK);
     }
     @DeleteMapping("delete/{id}")
-    public ResponseEntity<ResponseProduct> deleteById(@PathVariable("id") Integer id){
+    public ResponseEntity<ResponseProduct> deleteById(@PathVariable("id") Integer id,@RequestHeader( value ="Authorization") String token){
         if(!service.existById(id))
             return new ResponseEntity(new Message("no existe"), HttpStatus.NOT_FOUND);
-         service.delete(id);
+         service.delete(id,token);
         return new ResponseEntity(HttpStatus.OK);
     }
     @PostMapping("/create")
-    public  ResponseEntity<ResponseTasa> insert(@RequestBody ResponseTasa request) {
-        ResponseTasa product = service.insert(request);
+    public  ResponseEntity<ResponseTasa> insert(@RequestBody ResponseTasa request,@RequestHeader( value ="Authorization") String token) {
+        ResponseTasa product = service.insert(request, token);
         return new ResponseEntity(product, HttpStatus.OK);
     }
 

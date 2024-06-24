@@ -7,9 +7,15 @@
 /home/jose/work/product/src/main/java/com/example/product/repository/ProductRepository.java
 /home/jose/work/product/src/main/java/com/example/product/ProductApplication.java
 /home/jose/work/product/src/main/java/com/example/product/service/ProducServImpl.java
+/home/jose/work/product/src/main/java/com/example/product/service/EmailService.java
 /home/jose/work/product/src/main/java/com/example/product/dto/RequestProduct.java
 /home/jose/work/product/src/main/java/com/example/product/dto/Message.java
+/home/jose/work/product/src/main/java/com/example/product/dto/SecurityResponse.java
 /home/jose/work/product/src/main/java/com/example/product/dto/ResponseTasa.java
+/home/jose/work/product/src/main/java/com/example/product/dto/EmailRequest.java
+/home/jose/work/product/src/main/java/com/example/product/controller/WebClientConfig.java
+/home/jose/work/product/src/main/java/com/example/product/controller/EmailController.java
 /home/jose/work/product/src/main/java/com/example/product/dto/ResponseProduct.java
+/home/jose/work/product/src/main/java/com/example/product/config/MailConfig.java
 /home/jose/work/product/src/main/java/com/example/product/service/CambioService.java
 /home/jose/work/product/src/main/java/com/example/product/controller/CambioController.java
