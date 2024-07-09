@@ -1,8 +1,10 @@
+/home/jose/work/product/src/main/java/com/example/product/chat/ChatHandler.java
 /home/jose/work/product/src/main/java/com/example/product/service/ProductServ.java
 /home/jose/work/product/src/main/java/com/example/product/repository/RepositoryCambio.java
 /home/jose/work/product/src/main/java/com/example/product/controller/ProductoController.java
 /home/jose/work/product/src/main/java/com/example/product/service/CambioServImpl.java
 /home/jose/work/product/src/main/java/com/example/product/product/Product.java
+/home/jose/work/product/src/main/java/com/example/product/config/WebSocketConfig.java
 /home/jose/work/product/src/main/java/com/example/product/product/Cambio.java
 /home/jose/work/product/src/main/java/com/example/product/repository/ProductRepository.java
 /home/jose/work/product/src/main/java/com/example/product/ProductApplication.java
