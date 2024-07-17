@@ -31,8 +31,8 @@ public class CambioController {
         return new ResponseEntity(product, HttpStatus.OK);
     }
     @PutMapping("/update/{request}")
-    public  ResponseEntity<ResponseTasa> update(@RequestBody ResponseTasa request,@RequestHeader( value ="Authorization") String token) {
-        ResponseTasa product = service.updateCambio(request,token);
+    public  ResponseEntity<ResponseTasa> update(@RequestBody ResponseTasa request) {
+        ResponseTasa product = service.updateCambio(request);
         return new ResponseEntity(product, HttpStatus.OK);
     }
     @DeleteMapping("delete/{id}")

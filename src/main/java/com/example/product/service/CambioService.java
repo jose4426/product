@@ -1,7 +1,5 @@
 package com.example.product.service;
 
-import com.example.product.dto.RequestProduct;
-import com.example.product.dto.ResponseProduct;
 import com.example.product.dto.ResponseTasa;
 import org.springframework.stereotype.Service;
 
@@ -13,5 +11,5 @@ public interface CambioService {
     boolean existById(Integer id);
     ResponseTasa insert(ResponseTasa request, String token);
     void delete(Integer id, String token);
-    ResponseTasa updateCambio(ResponseTasa request,String token);
+    ResponseTasa updateCambio(ResponseTasa request);
 }

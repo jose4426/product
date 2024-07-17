@@ -12,10 +12,10 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 @Component
 public class CambioServImpl implements CambioService{
-    @Autowired
+    @Autowired(required=true)
     private RepositoryCambio repository;
 
-    @Autowired
+    @Autowired(required=true)
     private WebClient webClient;
 
 
@@ -54,10 +54,10 @@ public class CambioServImpl implements CambioService{
     }
 
     @Override
-    public ResponseTasa updateCambio(ResponseTasa request,String token) {
+    public ResponseTasa updateCambio(ResponseTasa request) {
         if (Objects.isNull(request.getId())){
             throw new IllegalArgumentException("el id no puede ser null");
-        }        if (validateToken(token)) {
+        }
 
             Cambio cambioExist = repository.findById(request.getId()).orElse(null);
             cambioExist.setTasa(request.getTasa());
@@ -66,7 +66,6 @@ public class CambioServImpl implements CambioService{
             Cambio cambio = repository.save(cambioExist);
 
             return this.cambiosToResponse(cambio);
-        } throw new RuntimeException("no tines los permisos");
     }
 
     ResponseTasa cambiosToResponse(Cambio cambio){
@@ -90,7 +89,7 @@ public class CambioServImpl implements CambioService{
     public boolean validateToken(String token) {
         return webClient.get()
                 .uri("http://localhost:8080/api/user/validate")
-                .header("Authorization", "Bearer " + token)
+                .header("Authorization", token)
                 .retrieve()
                 .bodyToMono(Boolean.class)
                 .block();

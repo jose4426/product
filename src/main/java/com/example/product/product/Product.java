@@ -19,5 +19,8 @@ public class Product {
     @Column(name = "name")
     private String nombre;
     @Column(name = "price")
-    private float precio;
+    private double precio;
+
+    public Product(String nombre, double precio) {
+    }
 }
