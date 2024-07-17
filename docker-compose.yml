@@ -1,8 +1,23 @@
 version: '3.8'
+
 services:
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "8088:8088"
     environment:
-      SPRING_PROFILES_ACTIVE: dev
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/producto
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root_password
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SERVER_PORT=8088
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: producto
+    ports:
+      - "3306:3306"
