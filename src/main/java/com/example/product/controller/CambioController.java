@@ -43,8 +43,8 @@ public class CambioController {
         return new ResponseEntity(HttpStatus.OK);
     }
     @PostMapping("/create")
-    public  ResponseEntity<ResponseTasa> insert(@RequestBody ResponseTasa request,@RequestHeader( value ="Authorization") String token) {
-        ResponseTasa product = service.insert(request, token);
+    public  ResponseEntity<ResponseTasa> insert(@RequestBody ResponseTasa request) {
+        ResponseTasa product = service.insert(request);
         return new ResponseEntity(product, HttpStatus.OK);
     }
 

@@ -24,4 +24,13 @@ public class EmailController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @PostMapping("/sendmr")
+    public ResponseEntity<String> sendEmailMr(@RequestBody EmailRequest request) {
+        try {
+            emailService.sendEmailMr(request.getTo(), request.getSubject(), request.getText());
+            return new ResponseEntity<>("Email sent successfully", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

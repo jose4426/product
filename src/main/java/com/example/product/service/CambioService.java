@@ -9,7 +9,7 @@ public interface CambioService {
     List<ResponseTasa> findAll( );
     ResponseTasa getById(Integer id);
     boolean existById(Integer id);
-    ResponseTasa insert(ResponseTasa request, String token);
+    ResponseTasa insert(ResponseTasa request);
     void delete(Integer id, String token);
     ResponseTasa updateCambio(ResponseTasa request);
 }

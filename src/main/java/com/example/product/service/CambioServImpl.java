@@ -29,7 +29,8 @@ public class CambioServImpl implements CambioService{
 
     @Override
     public ResponseTasa getById(Integer id) {
-      return  null;
+       Cambio cambio=  repository.getById(id);
+         return cambiosToResponse(cambio);
     }
 
     @Override
@@ -38,11 +39,10 @@ public class CambioServImpl implements CambioService{
     }
 
     @Override
-    public ResponseTasa insert(ResponseTasa request, String token) {
-        if (validateToken(token)) {
+    public ResponseTasa insert(ResponseTasa request) {
+
             Cambio cambio = repository.save(this.requestToCambio(request));
-            return this.cambiosToResponse(cambio);
-        } throw new RuntimeException("no tines los permisos");
+            return cambiosToResponse(cambio);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class CambioServImpl implements CambioService{
 
             Cambio cambio = repository.save(cambioExist);
 
-            return this.cambiosToResponse(cambio);
+            return cambiosToResponse(cambio);
     }
 
     ResponseTasa cambiosToResponse(Cambio cambio){
