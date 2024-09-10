@@ -56,16 +56,18 @@ public class MrService {
         }
         String valorString = dolarElement.text().trim();
         String valorStrin = element.text().trim();
+        System.out.println(" hace el scraping " +valorString);
 
         float precio;
         String nombre;
         String signo;
         // float precio = Float.parseFloat(valorString.replace(",", "."));
         try {
-            nombre = valorStrin.substring(18, 27);
+            nombre = valorStrin.substring(18, 26);
 
             signo = valorString.substring(0,1);
             precio = Float.parseFloat(valorString.substring(1, 7));
+
 
 
         } catch (NumberFormatException e) {
@@ -78,18 +80,20 @@ public class MrService {
                 .nombre(nombre).build();
 
         ResponseTasa tasa = cambioService.getById(requestProduct.getId());
+        log.info("trae data "+ tasa);
+
         if (tasa == null) {
             throw new IOException("No se encontro la tasa con el id 7");
         }
 
         if (tasa.getTasa() != requestProduct.getTasa()) {
             cambioService.updateCambio(requestProduct);
-            emailService.sendEmailMr(request.getTo(),   signo + " " + requestProduct.getTasa(), "precio: " + tasa.getNombre() +  "\nCantidad: " +signo +" " + requestProduct.getTasa() );
-            return new Dolar(requestProduct.getNombre(), precio);
+            emailService.sendEmailMr(request.getTo(),   signo + " " + requestProduct.getTasa(), "precio: " + requestProduct.getNombre() +  "\nCantidad: " +signo +" " + requestProduct.getTasa() );
+            return new Dolar(requestProduct.getNombre() + requestProduct.getNombre(), precio);
         } else {
             // throw new IOException("no hay actualizaciones ");
             System.out.println("No hay actualizaciones ");
-            return null;
+            return new Dolar(tasa.getNombre(), tasa.getTasa());
         }
 
     }
