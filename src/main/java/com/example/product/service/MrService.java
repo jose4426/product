@@ -80,7 +80,7 @@ public class MrService {
                 .nombre(nombre).build();
 
         ResponseTasa tasa = cambioService.getById(requestProduct.getId());
-        log.info("trae data "+ tasa);
+        log.info("trae data");
 
         if (tasa == null) {
             throw new IOException("No se encontro la tasa con el id 7");

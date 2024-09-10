@@ -14,8 +14,10 @@
 /home/jose/work/product/src/main/java/com/example/product/chat/ChatHandler.java
 /home/jose/work/product/src/main/java/com/example/product/service/ProductServ.java
 /home/jose/work/product/src/main/java/com/example/product/controller/ScrapingController.java
+/home/jose/work/product/src/main/java/com/example/product/dto/EmailRequestMr.java
 /home/jose/work/product/src/main/java/com/example/product/product/Product.java
 /home/jose/work/product/src/main/java/com/example/product/config/WebSocketConfig.java
+/home/jose/work/product/src/main/java/com/example/product/service/MrService.java
 /home/jose/work/product/src/main/java/com/example/product/product/Cambio.java
 /home/jose/work/product/src/main/java/com/example/product/dto/Message.java
 /home/jose/work/product/src/main/java/com/example/product/dto/EmailRequest.java
