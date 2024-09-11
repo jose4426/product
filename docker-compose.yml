@@ -1,29 +1,35 @@
 version: '3.8'
 
 services:
-  db:
-    image: mysql:8.0
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: producto
-    ports:
-      - "3307:3306"
-
   app:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8088:8088"
+      - "8088:8088"  # El puerto en el que la aplicación estará disponible
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/producto
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=password
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://dpg-crgbie5svqrc73f0vf5g-a.oregon-postgres.render.com:5432/productdb_rnbs
+      - SPRING_DATASOURCE_USERNAME=productdb_rnbs_user
+      - SPRING_DATASOURCE_PASSWORD=HiqCnLEBXQorR5jJilvvcvG30S0rgHrb
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
       - SERVER_PORT=8088
     depends_on:
       - db
-networks:
-  default:
-    driver: bridge
+    networks:
+      - backend
 
+  db:
+    image: postgres:15.1  # Usa la imagen oficial de PostgreSQL
+    environment:
+      POSTGRES_DB: productdb_rnbs
+      POSTGRES_USER: productdb_rnbs_user
+      POSTGRES_PASSWORD: HiqCnLEBXQorR5jJilvvcvG30S0rgHrb
+    ports:
+      - "5432:5432"  # Exponiendo el puerto de PostgreSQL para acceder a la base de datos
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
