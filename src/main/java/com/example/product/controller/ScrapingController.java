@@ -11,7 +11,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/cambio")
-@CrossOrigin(origins = "")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ScrapingController {
     @Autowired
     private ScraperService scrapingService;
