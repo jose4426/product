@@ -47,7 +47,8 @@ public class MrService {
 
     @Transactional
     public Dolar scrapingMr(EmailRequestMr request) throws IOException {
-        Document doc = Jsoup.connect("https://bitinfocharts.com/bitcoin/address/1Ay8vMC7R1UbyCCZRVULMV7iQpHSAbguJP").get();
+        Document doc = Jsoup.connect("https://bitinfocharts.com/bitcoin/address/1Ay8vMC7R1UbyCCZRVULMV7iQpHSAbguJP").validateTLSCertificates(false)
+                .get();
         Element dolarElement = doc.select("span.text-success").first();
         Element element = doc.select("#table_maina .trb td:nth-child(5) ").first();
 

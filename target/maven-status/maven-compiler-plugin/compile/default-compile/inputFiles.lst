@@ -16,6 +16,7 @@
 /home/jose/work/product/src/main/java/com/example/product/controller/ScrapingController.java
 /home/jose/work/product/src/main/java/com/example/product/dto/EmailRequestMr.java
 /home/jose/work/product/src/main/java/com/example/product/product/Product.java
+/home/jose/work/product/src/main/java/com/example/product/config/WebConfig.java
 /home/jose/work/product/src/main/java/com/example/product/config/WebSocketConfig.java
 /home/jose/work/product/src/main/java/com/example/product/service/MrService.java
 /home/jose/work/product/src/main/java/com/example/product/product/Cambio.java
