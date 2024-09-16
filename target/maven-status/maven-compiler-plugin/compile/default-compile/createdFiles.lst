@@ -25,6 +25,7 @@ com/example/product/ProductApplication.class
 com/example/product/product/Product.class
 com/example/product/service/CambioServImpl.class
 com/example/product/service/EmailService.class
+com/example/product/config/WebConfig.class
 com/example/product/dto/EmailRequestMr.class
 com/example/product/dto/EmailRequest.class
 com/example/product/controller/ScrapingController.class
