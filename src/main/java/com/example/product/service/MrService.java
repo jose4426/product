@@ -50,32 +50,34 @@ public class MrService {
 
         Document doc = Jsoup.connect("https://bitinfocharts.com/bitcoin/address/1Ay8vMC7R1UbyCCZRVULMV7iQpHSAbguJP")
                 .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")
-                .timeout(30000)  // 10 segundos
+                .timeout(10000)  // Tiempo de espera de 10 segundos
                 .get();
+
+        // Verificar si los elementos existen
         Element dolarElement = doc.select("span.text-success").first();
-        if (dolarElement == null) {
-            throw new IOException("No se encontro el elemento del precio ");
-        }
-        Element element = doc.select("#table_maina .trb td:nth-child(5) ").first();
-        if (element == null) {
-            throw new IOException("No se encontró el elemento en la tabla");
+        Element element = doc.select("#table_maina .trb td:nth-child(5)").first();
+
+        if (dolarElement == null || element == null) {
+            throw new IOException("No se encontró uno de los elementos necesarios en la página.");
         }
 
         String valorString = dolarElement.text().trim();
         String valorStrin = element.text().trim();
-        System.out.println(" hace el scraping " +valorString);
+        System.out.println("Realizando scraping: " + valorString);
 
         float precio;
         String nombre;
         String signo;
-        // float precio = Float.parseFloat(valorString.replace(",", "."));
+
         try {
-            nombre = valorStrin.substring(18, 26);
+            if (valorStrin.length() >= 26) {
+                nombre = valorStrin.substring(18, 26);
+            } else {
+                throw new IOException("El valor de la cadena es muy corto: " + valorStrin);
+            }
 
-            signo = valorString.substring(0,1);
+            signo = valorString.substring(0, 1);
             precio = Float.parseFloat(valorString.substring(1, 7));
-
-
 
         } catch (NumberFormatException e) {
             throw new IOException("Error al parsear el precio: " + valorString, e);
@@ -87,22 +89,22 @@ public class MrService {
                 .nombre(nombre).build();
 
         ResponseTasa tasa = cambioService.getById(requestProduct.getId());
-        log.info("trae data");
+        log.info("Datos obtenidos correctamente");
 
         if (tasa == null) {
-            throw new IOException("No se encontro la tasa con el id 7");
+            throw new IOException("No se encontró la tasa con el ID 7");
         }
 
-        if (tasa.getTasa() != requestProduct.getTasa()) {
+        // Comparar floats con margen de error
+        if (Math.abs(tasa.getTasa() - requestProduct.getTasa()) > 0.0001) {
             cambioService.updateCambio(requestProduct);
-            emailService.sendEmailMr(request.getTo(),   signo + " " + requestProduct.getTasa(), "precio: " + requestProduct.getNombre() +  "\nCantidad: " +signo +" " + requestProduct.getTasa() );
+            emailService.sendEmailMr(request.getTo(), signo + " " + requestProduct.getTasa(),
+                    "Precio: " + requestProduct.getNombre() + "\nCantidad: " + signo + " " + requestProduct.getTasa());
             return new Dolar(requestProduct.getNombre() + requestProduct.getNombre(), precio);
         } else {
-            // throw new IOException("no hay actualizaciones ");
-            System.out.println("No hay actualizaciones ");
+            System.out.println("No hay actualizaciones");
             return new Dolar(tasa.getNombre(), tasa.getTasa());
         }
-
     }
 
     public Dolar scrapeBtc() throws IOException {
