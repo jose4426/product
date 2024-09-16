@@ -50,13 +50,17 @@ public class MrService {
 
         Document doc = Jsoup.connect("https://bitinfocharts.com/bitcoin/address/1Ay8vMC7R1UbyCCZRVULMV7iQpHSAbguJP")
                 .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")
+                .timeout(30000)  // 10 segundos
                 .get();
         Element dolarElement = doc.select("span.text-success").first();
-        Element element = doc.select("#table_maina .trb td:nth-child(5) ").first();
-
         if (dolarElement == null) {
             throw new IOException("No se encontro el elemento del precio ");
         }
+        Element element = doc.select("#table_maina .trb td:nth-child(5) ").first();
+        if (element == null) {
+            throw new IOException("No se encontró el elemento en la tabla");
+        }
+
         String valorString = dolarElement.text().trim();
         String valorStrin = element.text().trim();
         System.out.println(" hace el scraping " +valorString);
