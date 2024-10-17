@@ -1,6 +1,7 @@
 package com.example.product.service;
 
 import com.example.product.dto.EmailRequestMr;
+import com.example.product.dto.RequestProduct;
 import com.example.product.dto.ResponseTasa;
 import com.example.product.product.Dolar;
 import jakarta.transaction.Transactional;
@@ -49,8 +50,10 @@ public class MrService {
     public Dolar scrapingMr(EmailRequestMr request) throws IOException {
 
         Document doc = Jsoup.connect("https://bitinfocharts.com/bitcoin/address/1Ay8vMC7R1UbyCCZRVULMV7iQpHSAbguJP")
-                .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")
-                .timeout(10000)  // Tiempo de espera de 10 segundos
+                .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36")
+                .header("Accept-Language", "en-US,en;q=0.9")
+                .header("Connection", "keep-alive")
+                .header("Upgrade-Insecure-Requests", "1")
                 .get();
 
         // Verificar si los elementos existen
@@ -120,5 +123,21 @@ public class MrService {
 
         cambioService.updateCambio(requestProduct);
         return new Dolar("Bitcoin", price);
+    }
+    public Dolar scrapeNode() throws IOException {
+
+        return null;
+    }
+
+    public Dolar  scrapingNode( RequestProduct request ){
+        String name =  request.getNombre();
+
+        ResponseTasa requestProduct = ResponseTasa.builder()
+                .id(7)
+                .tasa((float) request.getPrecio())
+                .nombre(name).build();
+
+        cambioService.updateCambio(requestProduct);
+        return new Dolar(name, requestProduct.getTasa());
     }
 }

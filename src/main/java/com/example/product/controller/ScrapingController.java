@@ -1,6 +1,7 @@
 package com.example.product.controller;
 
 import com.example.product.dto.EmailRequestMr;
+import com.example.product.dto.RequestProduct;
 import com.example.product.product.Dolar;
 import com.example.product.service.MrService;
 import com.example.product.service.ScraperService;
@@ -33,5 +34,9 @@ public class ScrapingController {
     @PostMapping("/mrs")
     public Dolar   scrapingMr() throws IOException {
         return mrService.start();
+    }
+    @PostMapping("/mrn")
+    public Dolar scrapingMrNode(@RequestBody RequestProduct request) throws IOException {
+        return mrService.scrapingNode(request);
     }
 }

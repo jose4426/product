@@ -23,7 +23,9 @@ public class CambioServImpl implements CambioService{
     public List<ResponseTasa> findAll() {
             List<Cambio> cambios = repository.findAll();
 
-            return !cambios.isEmpty() ? cambios.stream().map(this::cambiosToResponse).collect(Collectors.toList()) : null;
+            return !cambios.isEmpty() ? cambios.stream()
+                    .map(this::cambiosToResponse)
+                    .collect(Collectors.toList()) : null;
 
         }
 
@@ -87,11 +89,11 @@ public class CambioServImpl implements CambioService{
         );
     }
     public boolean validateToken(String token) {
-        return webClient.get()
+        return Boolean.TRUE.equals(webClient.get()
                 .uri("http://localhost:8080/api/user/validate")
                 .header("Authorization", token)
                 .retrieve()
                 .bodyToMono(Boolean.class)
-                .block();
+                .block());
     }
 }
